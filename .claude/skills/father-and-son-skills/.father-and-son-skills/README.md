@@ -15,6 +15,8 @@
 - 子 skill 建议放在各自独立目录中，例如 `drafts/<child-name>/SKILL.md`。
 - 晋级到 `active/` 时，保留相同的子目录结构，避免文件名漂移。
 - 如果子 skill 需要脚本、模板或引用说明，可以一并放在该子目录下，由对应 `SKILL.md` 引用。
+- 如果子 skill 需要内置脚本，建议在子目录下增加 `scripts/`、`references/`、`assets/` 和 `tests/`。
+- 复杂子 skill 的通用逻辑先由副父 skill `father-and-son-skills-core` 处理，再进入当前的草稿与生效流程。
 
 ## 显式调用和创建
 
@@ -22,11 +24,19 @@
 - 用户可以显式要求创建某个子 skill，系统先在 `drafts/` 建立该子 skill 的草稿。
 - 草稿完成后，要询问用户是否要载入生效池。
 - 用户确认后，才允许进入 `active/`。
+- 如果子 skill 复杂到需要脚本或通用模板，先交给 `father-and-son-skills-core` 生成结构，再回到这里做具体落盘。
 
 ## 最小规则
 - 运行时只扫描 `active/`。
 - `drafts/` 只作为中间态。
 - 任何内容进入 `active/`，都必须经过用户确认。
+
+## 复杂子 skill 规则
+
+- 纯文本型子 skill 可以直接按当前规则生成。
+- 需要脚本的子 skill 不要只写一个 `SKILL.md`，要把脚本放进 `scripts/`。
+- 通用逻辑、目录模板和脚本约定由副父 skill 统一管理。
+- 子 skill 复杂度过高时，优先拆成可复用的脚本和说明文件，再进入 active。
 
 ## 流转规则
 
